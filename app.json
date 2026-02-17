@@ -1,6 +1,6 @@
 {
   "expo": {
-    "icon": "https://agent.expo.app/static/icon.png",
+    "icon": "https://storage.googleapis.com/expo-agent-images-production/production/5828baef-4030-45c5-b232-d001f9994231/019c6949-85ca-7ac4-bdfc-413949779ca1/45ccd94f-3af7-4cd3-8e73-4aede6dffdc4",
     "orientation": "default",
     "scheme": "acme",
     "userInterfaceStyle": "automatic",
@@ -15,7 +15,8 @@
       "expo-font",
       "expo-image",
       "expo-router",
-      "expo-web-browser"
+      "expo-web-browser",
+      "@bacons/apple-colors"
     ],
     "name": "Duvall Filmography",
     "owner": "ccheever-agenttest1"

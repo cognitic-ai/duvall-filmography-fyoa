@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Tabs as WebTabs } from "expo-router/tabs";
 import { NativeTabs } from "expo-router/unstable-native-tabs";
+import { Tabs as WebTabs } from "expo-router/tabs";
 import { Platform, useWindowDimensions } from "react-native";
 
 export default function Layout() {
@@ -15,9 +15,8 @@ export default function Layout() {
 function TabsLayout() {
   if (process.env.EXPO_OS === "web") {
     return <WebTabsLayout />;
-  } else {
-    return <NativeTabsLayout />;
   }
+  return <NativeTabsLayout />;
 }
 
 function WebTabsLayout() {
@@ -41,19 +40,20 @@ function WebTabsLayout() {
       }}
     >
       <WebTabs.Screen
-        name="index"
+        name="(filmography)"
         options={{
-          title: "Home",
-          tabBarIcon: (props) => <MaterialIcons {...props} name="home" />,
+          title: "Filmography",
+          tabBarIcon: (props) => <MaterialIcons {...props} name="movie" />,
         }}
       />
       <WebTabs.Screen
-        name="info"
+        name="(tribute)"
         options={{
-          title: "Info",
-          tabBarIcon: (props) => <MaterialIcons {...props} name="info" />,
+          title: "Tribute",
+          tabBarIcon: (props) => <MaterialIcons {...props} name="star" />,
         }}
       />
+      <WebTabs.Screen name="movie" options={{ href: null }} />
     </WebTabs>
   );
 }
@@ -61,28 +61,39 @@ function WebTabsLayout() {
 function NativeTabsLayout() {
   return (
     <NativeTabs>
-      <NativeTabs.Trigger name="index">
-        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
+      <NativeTabs.Trigger name="(filmography)">
+        <NativeTabs.Trigger.Label>Filmography</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon
           {...Platform.select({
-            ios: { sf: { default: "house", selected: "house.fill" } },
+            ios: { sf: { default: "film", selected: "film.fill" } },
             default: {
-              src: <NativeTabs.Trigger.VectorIcon family={MaterialIcons} name="home" />,
+              src: (
+                <NativeTabs.Trigger.VectorIcon
+                  family={MaterialIcons}
+                  name="movie"
+                />
+              ),
             },
           })}
         />
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="info">
-        <NativeTabs.Trigger.Label>Info</NativeTabs.Trigger.Label>
+      <NativeTabs.Trigger name="(tribute)">
+        <NativeTabs.Trigger.Label>Tribute</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon
           {...Platform.select({
-            ios: { sf: "cursorarrow.rays" },
+            ios: { sf: { default: "star", selected: "star.fill" } },
             default: {
-              src: <NativeTabs.Trigger.VectorIcon family={MaterialIcons} name="info" />,
+              src: (
+                <NativeTabs.Trigger.VectorIcon
+                  family={MaterialIcons}
+                  name="star"
+                />
+              ),
             },
           })}
         />
       </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="movie" hidden />
     </NativeTabs>
   );
 }
